@@ -1,11 +1,11 @@
 /* eslint-disable react/react-in-jsx-scope */
-import { Hello } from './components/Hello'
+import { Header } from './components/Header'
 import { GlobalStyle } from './styles/global'
 
 function App () {
   return (
     <>
-      <Hello />
+      <Header />
       <GlobalStyle />
     </>
   )
