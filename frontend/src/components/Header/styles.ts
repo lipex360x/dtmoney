@@ -10,7 +10,7 @@ export const Content = styled.div`
   width: 100%;
   max-width: 1180px;
   margin: 0 auto;
-  padding-top: 1.5rem;
+  padding: 1.5rem 0.8rem;
   
   display: flex;
   align-items: center;
