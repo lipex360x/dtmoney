@@ -60,7 +60,9 @@ export const GlobalStyle = createGlobalStyle`
   
   /* END RESET */
   
-  .react-modal-overlay{
+
+  /* MODAL */
+  .modal-overlay{
     background: rgba(0,0,0,0.5);
 
     position: fixed;
@@ -74,7 +76,7 @@ export const GlobalStyle = createGlobalStyle`
     justify-content: center;
   }
   
-  .react-modal-content {
+  .modal-content {
     position: relative;
     
     width: 100%;
@@ -86,7 +88,7 @@ export const GlobalStyle = createGlobalStyle`
     border-radius: 0.25rem;
   }
 
-  .react-modal-close {
+  .btn-modal-close {
     position: absolute;
     right: 1.5rem;
     top: 1.5rem;
@@ -96,6 +98,19 @@ export const GlobalStyle = createGlobalStyle`
     &:hover {
       filter: brightness(0.8);
     }
+  }
+
+  .ReactModal__Overlay {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .ReactModal__Overlay--after-open {
+    opacity: 1;
+  }
+
+  .ReactModal__Overlay--before-close {
+    opacity: 0;
   }
 
 `
