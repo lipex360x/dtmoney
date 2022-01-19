@@ -1,6 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { Header } from './components/Header'
 import { Summary } from './components/Summary'
+import { Transactions } from './components/Transactions'
 import { GlobalStyle } from './styles/global'
 
 function App () {
@@ -8,6 +9,7 @@ function App () {
     <>
       <Header />
       <Summary />
+      <Transactions />
       <GlobalStyle />
     </>
   )

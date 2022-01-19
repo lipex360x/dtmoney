@@ -23,6 +23,7 @@ export const Container = styled.section`
       align-items: center;
       justify-content: space-between;
       margin-bottom: 1rem;
+      color: var(--text-title);
     }
 
     h2 {
@@ -31,6 +32,9 @@ export const Container = styled.section`
     }
 
     &.total {
+      header {
+        color: #fff
+      }
       background: var(--green);
       color: #fff;
     }
