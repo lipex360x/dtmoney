@@ -29,14 +29,14 @@ export const Container = styled.section`
     h2 {
       font-size: 2rem;
       font-weight: 400;
+      color: #444;
     }
 
     &.total {
-      header {
+      background: var(--green);
+      header, h2 {
         color: #fff
       }
-      background: var(--green);
-      color: #fff;
     }
   }
 `

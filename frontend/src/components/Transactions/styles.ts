@@ -21,7 +21,7 @@ export const Container = styled.section`
       background: #fff;
       padding: 0.5rem 2rem;
       border-radius: 0.25rem;
-      color: #444;
+      color: #666;
     }
   }
 `
