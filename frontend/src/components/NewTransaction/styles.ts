@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { darken } from 'polished'
+import { darken, transparentize } from 'polished'
 
 export const Container = styled.form`
  display: grid;
@@ -11,18 +11,19 @@ export const Container = styled.form`
    color: var(--text-title)
  }
 
- input[type='text'] {
+ input {
    font-size: 1rem;
    border: 1px solid #D7D7D7;
    border-radius: 0.25rem;
    padding: 1rem;
+   color: #555;
 
    &::placeholder {
-     color: #E7E9EE;
+     color: #e7e9ee;
    }
 
    &:focus {
-      border: 1px solid #D7D7D7;
+      border: 1px solid #d7d7d7;
       outline: 1px solid #d0d0d0;
    }
  }
@@ -48,13 +49,34 @@ export const TypeButtons = styled.div`
   gap: 1rem;
 `
 
-export const Button = styled.button`
+interface ButtonProps {
+  isActive: boolean
+  activeColor: 'green' | 'red'
+}
+
+const colors = {
+  green: '#33cc95',
+  red: '#e52e40'
+}
+
+export const Button = styled.button<ButtonProps>`
   display: flex;
   height: 3.5rem;
   align-items: center;
   justify-content: center;
-  border: 1px solid #d7d7d7;
   border-radius: 0.25rem;
+
+  transition: background 0.2s;
+
+  background: ${(props) => props.isActive
+    ? transparentize(0.9, colors[props.activeColor])
+    : 'transparent'
+  };
+
+  border: 1px solid ${(props) => props.isActive
+    ? transparentize(0.7, colors[props.activeColor])
+    : '#d7d7d7'
+  };
 
   img {
     width: 20px;
