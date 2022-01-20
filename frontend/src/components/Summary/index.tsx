@@ -8,7 +8,31 @@ import * as S from './styles'
 
 export function Summary () {
   const { providerData } = useTransactions()
-  console.log(providerData)
+
+  const summary = providerData.reduce((acc, transaction) => {
+    const amount = transaction.amount
+
+    switch (transaction.type) {
+      case 'deposit':
+        acc.deposit += amount
+        acc.total += amount
+        break
+      case 'withdraw':
+        acc.withdraw += amount
+        acc.total -= amount
+        break
+      default:
+        acc.deposit = 0
+        acc.withdraw = 0
+        acc.total = 0
+    }
+
+    return acc
+  }, {
+    deposit: 0,
+    withdraw: 0,
+    total: 0
+  })
 
   return (
     <S.Container>
@@ -18,7 +42,7 @@ export function Summary () {
           <span>Income</span>
           <img src={incomeImg} alt="income img" />
         </header>
-        <h2>{numberToReal(6000)}</h2>
+        <h2>{numberToReal(summary.deposit)}</h2>
       </div>
 
       <div>
@@ -26,7 +50,7 @@ export function Summary () {
           <span>Outcome</span>
           <img src={outcomeImg} alt="outcome img" />
         </header>
-        <h2>-{numberToReal(1000)}</h2>
+        <h2>-{numberToReal(summary.withdraw)}</h2>
       </div>
 
       <div className='total'>
@@ -34,7 +58,7 @@ export function Summary () {
           <span>Total</span>
           <img src={totalImg} alt="total img" />
         </header>
-        <h2>{numberToReal(5000)}</h2>
+        <h2>{numberToReal(summary.total)}</h2>
       </div>
     </S.Container>
   )
