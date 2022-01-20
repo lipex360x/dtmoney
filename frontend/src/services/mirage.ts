@@ -13,6 +13,10 @@ export default createServer({
 
       createdAt () {
         return new Date()
+      },
+
+      updatedAt () {
+        return new Date()
       }
     })
   },
