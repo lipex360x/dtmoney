@@ -26,8 +26,17 @@ const {{pascalCase contextName}}Context = createContext<ContextProps>(
 export function {{pascalCase contextName}}Provider ({ children }: ProviderChildrens) {
   const [providerData, setProviderData] = useState<ProviderProps[]>([])
 
+  useEffect(() => {
+    async function getData () {
+      const { data } = await api.get('xxxxx') // api get route
+      setProviderData(data.XXXXXXXX) // data property
+    }
+
+    getData()
+  }, [])
+
   async function createData (data: Request) {
-    const response = await api.post('xxxxx', data) // api route
+    const response = await api.post('xxxxx', data) // api post route
     const { {{camelCase contextName}} } = response.data
 
     setProviderData([...providerData, {{camelCase contextName}}])
