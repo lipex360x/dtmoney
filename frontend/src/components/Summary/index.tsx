@@ -1,11 +1,15 @@
 import incomeImg from '../../assets/income.svg'
 import outcomeImg from '../../assets/outcome.svg'
 import totalImg from '../../assets/total.svg'
+import { useTransactions } from '../../hooks/useTransactions'
 import { numberToReal } from '../../shared/utils/numberTransform'
 
 import * as S from './styles'
 
 export function Summary () {
+  const { providerData } = useTransactions()
+  console.log(providerData)
+
   return (
     <S.Container>
 

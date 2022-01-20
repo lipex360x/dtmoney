@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react'
 import { api } from '../services/api'
 
-interface TransactionsProps {
+interface ProviderProps {
   id: number
   title: string
   amount: number
@@ -10,48 +10,47 @@ interface TransactionsProps {
   createdAt: Date
 }
 
-type Request = Omit<TransactionsProps, 'id' | 'createdAt'>
+type Request = Omit<ProviderProps, 'id' | 'createdAt' | 'updatedAt'>
 
-interface TransactionsProviderProps {
+interface ContextProps {
+  providerData: ProviderProps[]
+  createData: (data: Request) => Promise<void>
+}
+
+interface ProviderChildrens {
   children: ReactNode
 }
 
-interface TransactionsContextProps {
-  transactions: TransactionsProps[]
-  createTransaction: (transaction: Request) => Promise<void>;
-}
-
-const TransactionsContext = createContext<TransactionsContextProps>(
-  {} as TransactionsContextProps
+const TransactionContext = createContext<ContextProps>(
+  {} as ContextProps
 )
 
-export function TransactionsProvider ({ children }: TransactionsProviderProps) {
-  const [transactions, setTransactions] = useState<TransactionsProps[]>([])
+export function TransactionProvider ({ children }: ProviderChildrens) {
+  const [providerData, setProviderData] = useState<ProviderProps[]>([])
 
   useEffect(() => {
-    async function getDados () {
+    async function getData () {
       const { data } = await api.get('transactions')
-      setTransactions(data.transactions)
+      setProviderData(data.transactions)
     }
 
-    getDados()
+    getData()
   }, [])
 
-  async function createTransaction (newTransaction: Request) {
-    const response = await api.post('transactions', newTransaction)
-
+  async function createData (data: Request) {
+    const response = await api.post('transactions', data)
     const { transaction } = response.data
 
-    setTransactions([...transactions, transaction])
+    setProviderData([...providerData, transaction])
   }
 
   return (
-    <TransactionsContext.Provider value={{ transactions, createTransaction }}>
+    <TransactionContext.Provider value={{ providerData, createData }}>
       {children}
-    </TransactionsContext.Provider>
+    </TransactionContext.Provider>
   )
 }
 
 export function useTransactions () {
-  return useContext(TransactionsContext)
+  return useContext(TransactionContext)
 }
