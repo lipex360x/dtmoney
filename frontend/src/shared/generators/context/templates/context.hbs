@@ -14,13 +14,13 @@ interface ProviderChildrens {
 
 type Request = Omit<ProviderProps, 'id' | 'createdAt' | 'updatedAt'>
 
-interface ContextProps {
+interface UseContextProps {
   providerData: ProviderProps[]
   createData: (data: Request) => Promise<void>
 }
 
-const {{pascalCase contextName}}Context = createContext<ContextProps>(
-  {} as ContextProps
+const {{pascalCase contextName}}Context = createContext<UseContextProps>(
+  {} as UseContextProps
 )
 
 export function {{pascalCase contextName}}Provider ({ children }: ProviderChildrens) {

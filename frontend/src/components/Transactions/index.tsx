@@ -1,8 +1,11 @@
+import { useTransactions } from '../../hooks/useTransactions'
 import { dateFormat } from '../../shared/utils/dateTransform'
 import { numberToReal } from '../../shared/utils/numberTransform'
 import * as S from './styles'
 
 export function Transactions () {
+  const { providerData } = useTransactions()
+
   return (
     <S.Container>
       <table>
@@ -16,19 +19,15 @@ export function Transactions () {
         </thead>
 
         <tbody>
-          <tr>
-            <td>Desenvolvimento de Site</td>
-            <td>{numberToReal(6000)}</td>
-            <td>Venda</td>
-            <td>{dateFormat(new Date())}</td>
-          </tr>
+          {providerData.map(transaction => (
+            <tr key={transaction.id}>
+              <td>{transaction.title}</td>
+              <td className={transaction.type}>{numberToReal(transaction.amount)}</td>
+              <td>{transaction.category}</td>
+              <td>{dateFormat(transaction.createdAt)}</td>
+            </tr>
+          ))}
 
-          <tr>
-            <td>Supermercado</td>
-            <td>{numberToReal(1000)}</td>
-            <td>Alimentação</td>
-            <td>{dateFormat(new Date())}</td>
-          </tr>
         </tbody>
       </table>
     </S.Container>

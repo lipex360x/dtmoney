@@ -22,6 +22,14 @@ export const Container = styled.section`
       padding: 0.5rem 2rem;
       border-radius: 0.25rem;
       color: #666;
+
+      &.deposit {
+        color: var(--green);
+      }
+
+      &.withdraw {
+        color: var(--red)
+      }
     }
   }
 `

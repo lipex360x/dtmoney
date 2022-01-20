@@ -5,6 +5,7 @@ import closeImg from '../../assets/close.svg'
 import incomeImg from '../../assets/income.svg'
 import outcomeImg from '../../assets/outcome.svg'
 import { FormEvent, useState } from 'react'
+import { useTransactions } from '../../hooks/useTransactions'
 
 interface NewTransactionProps {
   isOpen: boolean
@@ -12,6 +13,8 @@ interface NewTransactionProps {
 }
 
 export function NewTransaction ({ isOpen, onRequestClose }:NewTransactionProps) {
+  const { createData } = useTransactions()
+
   const [title, setTitle] = useState('')
   const [amount, setAmount] = useState(0)
   const [type, setType] = useState('deposit')
@@ -19,7 +22,7 @@ export function NewTransaction ({ isOpen, onRequestClose }:NewTransactionProps) 
 
   async function handleCreateTransaction (event: FormEvent) {
     event.preventDefault()
-
+    createData({ title, amount, category, type })
     handleCloseModal()
   }
 

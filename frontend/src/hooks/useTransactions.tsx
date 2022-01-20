@@ -8,11 +8,12 @@ interface ProviderProps {
   category: string
   type: string
   createdAt: Date
+  updatedAt: Date
 }
 
 type Request = Omit<ProviderProps, 'id' | 'createdAt' | 'updatedAt'>
 
-interface ContextProps {
+interface UseContextProps {
   providerData: ProviderProps[]
   createData: (data: Request) => Promise<void>
 }
@@ -21,8 +22,8 @@ interface ProviderChildrens {
   children: ReactNode
 }
 
-const TransactionContext = createContext<ContextProps>(
-  {} as ContextProps
+const TransactionContext = createContext<UseContextProps>(
+  {} as UseContextProps
 )
 
 export function TransactionProvider ({ children }: ProviderChildrens) {
