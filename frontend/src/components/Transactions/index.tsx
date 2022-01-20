@@ -1,18 +1,8 @@
-import { useEffect } from 'react'
-import { api } from '../../services/api'
 import { dateFormat } from '../../shared/utils/dateTransform'
 import { numberToReal } from '../../shared/utils/numberTransform'
 import * as S from './styles'
 
 export function Transactions () {
-  useEffect(() => {
-    async function teste () {
-      const { data } = await api.get('http://localhost:3000/api/transactions')
-      console.log(data.transactions)
-    }
-    teste()
-  }, [])
-
   return (
     <S.Container>
       <table>
