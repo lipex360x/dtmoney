@@ -11,21 +11,11 @@ export function Summary () {
 
   const summary = providerData.reduce((acc, transaction) => {
     const amount = transaction.amount
+    const type = transaction.type
 
-    switch (transaction.type) {
-      case 'deposit':
-        acc.deposit += amount
-        acc.total += amount
-        break
-      case 'withdraw':
-        acc.withdraw += amount
-        acc.total -= amount
-        break
-      default:
-        acc.deposit = 0
-        acc.withdraw = 0
-        acc.total = 0
-    }
+    if (type === 'deposit') acc.deposit += amount
+    if (type === 'withdraw') acc.withdraw += amount
+    acc.total += amount
 
     return acc
   }, {
@@ -50,7 +40,7 @@ export function Summary () {
           <span>Outcome</span>
           <img src={outcomeImg} alt="outcome img" />
         </header>
-        <h2>-{numberToReal(summary.withdraw)}</h2>
+        <h2>{numberToReal(summary.withdraw)}</h2>
       </div>
 
       <div className='total'>

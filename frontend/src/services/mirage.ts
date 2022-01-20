@@ -40,7 +40,7 @@ export default createServer({
 
     this.post('/transactions', (server, request) => {
       const data = JSON.parse(request.requestBody)
-
+      data.amount = data.type === 'deposit' ? data.amount : -data.amount
       data.createdAt = new Date()
       data.updatedAt = new Date()
 
